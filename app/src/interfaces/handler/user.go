@@ -2,6 +2,7 @@ package handler
 
 import (
 	"Go-Blog/app/src/usecase"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -20,4 +21,13 @@ func NewUserHandler(uu usecase.UserUseCase) UserHandler {
 	}
 }
 
-func (uh userHandler) Index(c *gin.Context) {}
+func (uh userHandler) Index(c *gin.Context) {
+
+	name := c.Param("name")
+	user, err := uh.userUseCase.Search(name)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "error"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "ok", "user info": user})
+}
