@@ -1,11 +1,29 @@
 version: '3'
 services: 
-    goBlog:
-        build: Dockerfile
-        command: 
-        stdin_open: true
-        tty: true
-        volumes: 
-          - .:/GO
-        ports: 
-          - 8021:8021
+  goblog:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    command: /bin/sh -c "go run ./main.go"
+    stdin_open: true
+    tty: true
+    volumes: 
+      - .:/GO
+    ports: 
+      - 8022:8022
+    depends_on: 
+      - dbblog
+  
+  dbblog:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: go_database
+      TZ: 'Asia/Tokyo'
+    volumes: 
+      - ./database/conf.d:/etc/mysql/conf.d
+      - ./database/initdb.d:/docker-entrypoint-initdb.d
+      - ./database/logs:/var/log/mysql
+    ports: 
+      - 3336:3306
+    
