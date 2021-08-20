@@ -1,6 +1,6 @@
 version: '3'
 services: 
-  goblog:
+  go_blog:
     build: 
       context: .
       dockerfile: Dockerfile
@@ -18,7 +18,7 @@ services:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: go_database
+      MYSQL_DATABASE: go_blog
       TZ: 'Asia/Tokyo'
     volumes: 
       - ./database/conf.d:/etc/mysql/conf.d
