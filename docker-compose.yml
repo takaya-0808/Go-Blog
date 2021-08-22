@@ -24,6 +24,7 @@ services:
       - ./database/conf.d:/etc/mysql/conf.d
       - ./database/initdb.d:/docker-entrypoint-initdb.d
       - ./database/logs:/var/log/mysql
+    restart: always
     ports: 
       - 3336:3306
     
