@@ -13,6 +13,7 @@ type userDatabase struct {
 }
 
 func NewUserDabase(conn *sql.DB) repository.UserRepository {
+
 	return &userDatabase{
 		Conn: conn,
 	}
@@ -36,6 +37,20 @@ func (ud *userDatabase) Get(name string) (*model.UserModel, error) {
 }
 
 func (ud *userDatabase) GetAll() []model.UserModel {
+
+	rows, err := ud.Conn.Query("select * from　users")
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
 	var users []model.UserModel
+	for rows.Next() {
+		user := model.UserModel{}
+		if err := rows.Scan(&user.Id, &user.UserName, &user.UserEmail, &user.UserPassWord, &user.CreatedAt, &user.UpdatedAt); err != nil {
+			panic(err)
+		}
+		users = append(users, user)
+	}
 	return users
 }
