@@ -7,6 +7,8 @@ import (
 
 type UserUseCase interface {
 	Search(name string) (*model.UserModel, error)
+	Add(user model.RegisterModel) (int, error)
+	Show() ([]model.UserModel, error)
 }
 
 type userUseCase struct {
@@ -26,4 +28,15 @@ func (uu userUseCase) Search(name string) (*model.UserModel, error) {
 		return nil, err
 	}
 	return user, nil
+}
+
+func (uu userUseCase) Add(user model.RegisterModel) (int, error) {
+
+	return 0, nil
+}
+
+func (uu userUseCase) Show() ([]model.UserModel, error) {
+
+	var users []model.UserModel
+	return users, nil
 }
