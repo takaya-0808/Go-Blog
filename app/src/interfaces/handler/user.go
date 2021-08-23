@@ -9,6 +9,7 @@ import (
 
 type UserHandler interface {
 	Index(c *gin.Context)
+	Show(c *gin.Context)
 }
 
 type userHandler struct {
@@ -31,3 +32,15 @@ func (uh userHandler) Index(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "ok", "user info": user})
 }
+
+func (uh userHandler) Show(c *gin.Context) {
+
+	users, err := uh.userUseCase.Show()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "error"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "OK", "user data": users})
+}
+
+// func (uh userHandler) Register(c *gin.Context) {}
