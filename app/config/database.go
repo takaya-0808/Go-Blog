@@ -10,6 +10,7 @@ var (
 )
 
 func Connection() *sql.DB {
+
 	dbDriver := "mysql"
 	dbUser := "root"
 	dbPass := "root"
