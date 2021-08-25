@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"Go-Blog/app/src/domain/model"
 	"Go-Blog/app/src/usecase"
 	"net/http"
 
@@ -46,5 +47,11 @@ func (uh userHandler) Show(c *gin.Context) {
 
 func (uh userHandler) Register(c *gin.Context) {
 
-	c.JSON(http.StatusOK, gin.H{"message": "ok"})
+	var user model.RegisterModel
+	id, err := uh.userUseCase.Add(user)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "errpr"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "ok", "id": id})
 }
