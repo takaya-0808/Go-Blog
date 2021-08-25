@@ -10,6 +10,7 @@ import (
 type UserHandler interface {
 	Index(c *gin.Context)
 	Show(c *gin.Context)
+	Register(c *gin.Context)
 }
 
 type userHandler struct {
@@ -43,4 +44,7 @@ func (uh userHandler) Show(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "OK", "user data": users})
 }
 
-// func (uh userHandler) Register(c *gin.Context) {}
+func (uh userHandler) Register(c *gin.Context) {
+
+	c.JSON(http.StatusOK, gin.H{"message": "ok"})
+}
