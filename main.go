@@ -20,7 +20,7 @@ func main() {
 	{
 		v1 := routerEngin.Group("/api/v1")
 		{
-			// v1.POST("/", userHandlr.Register)
+			v1.POST("/", userHandler.Register)
 			v1.GET("/:name", userHandler.Index)
 			v1.GET("/", userHandler.Show)
 		}
