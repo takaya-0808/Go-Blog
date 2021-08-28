@@ -7,7 +7,7 @@ import (
 
 type UserUseCase interface {
 	Search(name string) (*model.UserModel, error)
-	Add(user model.RegisterModel) (int, error)
+	Add(user model.RegisterModel) (string, error)
 	Show() ([]model.UserModel, error)
 }
 
@@ -30,9 +30,10 @@ func (uu userUseCase) Search(name string) (*model.UserModel, error) {
 	return user, nil
 }
 
-func (uu userUseCase) Add(user model.RegisterModel) (int, error) {
+func (uu userUseCase) Add(user model.RegisterModel) (string, error) {
 
-	return 0, nil
+	token := "0"
+	return token, nil
 }
 
 func (uu userUseCase) Show() ([]model.UserModel, error) {
