@@ -48,10 +48,11 @@ func (uh userHandler) Show(c *gin.Context) {
 func (uh userHandler) Register(c *gin.Context) {
 
 	var user model.RegisterModel
-	id, err := uh.userUseCase.Add(user)
+	c.Bind(&user)
+	token, err := uh.userUseCase.Add(user)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "errpr"})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"message": "ok", "id": id})
+	c.JSON(http.StatusOK, gin.H{"message": "ok", "token": token})
 }
