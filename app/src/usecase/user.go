@@ -3,6 +3,7 @@ package usecase
 import (
 	"Go-Blog/app/src/domain/model"
 	"Go-Blog/app/src/domain/repository"
+	"errors"
 )
 
 type UserUseCase interface {
@@ -33,7 +34,11 @@ func (uu userUseCase) Search(name string) (*model.UserModel, error) {
 func (uu userUseCase) Add(user model.RegisterModel) (string, error) {
 
 	token := "0"
-	return token, nil
+	if user.UserName == "hoge" && user.UserPassWord == "hoge" {
+		token = "1"
+		return token, nil
+	}
+	return token, errors.New("error")
 }
 
 func (uu userUseCase) Show() ([]model.UserModel, error) {
