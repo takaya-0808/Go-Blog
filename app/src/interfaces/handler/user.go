@@ -51,7 +51,7 @@ func (uh userHandler) Register(c *gin.Context) {
 	c.Bind(&user)
 	token, err := uh.userUseCase.Add(user)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message": "errpr"})
+		c.JSON(http.StatusBadRequest, gin.H{"message": "error"})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "ok", "token": token})
