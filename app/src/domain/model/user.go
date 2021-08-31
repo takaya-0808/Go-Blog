@@ -13,6 +13,7 @@ type UserModel struct {
 
 type RegisterModel struct {
 	UserName     string `json:"UserName"`
+	UserEmail    string `json:"UserEmail"`
 	UserPassWord string `json:"UserPassWord"`
 }
 
