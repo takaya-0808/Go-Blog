@@ -34,7 +34,7 @@ func (uu userUseCase) Search(name string) (*model.UserModel, error) {
 func (uu userUseCase) Add(user model.RegisterModel) (string, error) {
 
 	token := "1"
-	if user.UserName == "hoge" && user.UserEmail == "hoge" {
+	if user.UserName == "hoge" || user.UserEmail == "hoge" {
 		token = "0"
 		return token, errors.New("used name or email")
 	}
