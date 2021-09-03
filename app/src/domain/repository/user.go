@@ -7,6 +7,7 @@ type UserRepository interface {
 	GetAll() []model.UserModel
 	// Delte(id int) error
 	// Add(user *model.UserModel) (id int, err error)
+	RegisterCheck(user *model.RegisterModel) error
 }
 
 type BlogRepository interface{}
