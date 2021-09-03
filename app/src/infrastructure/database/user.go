@@ -54,3 +54,5 @@ func (ud *userDatabase) GetAll() []model.UserModel {
 	}
 	return users
 }
+
+func (ud *userDatabase) RegisterCheck(user *model.RegisterModel) error {}
