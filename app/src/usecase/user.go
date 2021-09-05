@@ -34,6 +34,13 @@ func (uu userUseCase) Search(name string) (*model.UserModel, error) {
 func (uu userUseCase) Add(user model.RegisterModel) (string, error) {
 
 	token := "1"
+
+	err := uu.userRepository.RegisterCheck(user.UserName, user.UserEmail)
+
+	if err != nil {
+		return "0", err
+	}
+
 	if user.UserName == "hoge" || user.UserEmail == "hoge" {
 		token = "0"
 		return token, errors.New("used name or email")
