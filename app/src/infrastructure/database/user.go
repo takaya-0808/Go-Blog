@@ -55,4 +55,12 @@ func (ud *userDatabase) GetAll() []model.UserModel {
 	return users
 }
 
-func (ud *userDatabase) RegisterCheck(user *model.RegisterModel) error {}
+func (ud *userDatabase) RegisterCheck(name string, email string) error {
+
+	rows, err := ud.Conn.Query("select * from users")
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+	return err
+}
