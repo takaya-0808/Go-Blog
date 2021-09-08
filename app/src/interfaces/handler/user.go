@@ -12,6 +12,7 @@ type UserHandler interface {
 	Index(c *gin.Context)
 	Show(c *gin.Context)
 	Register(c *gin.Context)
+	Login(c *gin.Context)
 }
 
 type userHandler struct {
@@ -55,4 +56,8 @@ func (uh userHandler) Register(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "ok", "token": token})
+}
+
+func (uh userHandler) Login(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message": "login success"})
 }
