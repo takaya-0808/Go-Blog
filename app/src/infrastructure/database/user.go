@@ -64,3 +64,12 @@ func (ud *userDatabase) RegisterCheck(name string, email string) error {
 	defer rows.Close()
 	return err
 }
+
+func (ud *userDatabase) Add(user model.RegisterModel) error {
+
+	_, err := ud.Conn.Exec("insert into users (username,useremail,userpassword) values (?, ?, ?)", user.UserName, user.UserEmail, user.UserPassWord)
+	if err != nil {
+		panic(err)
+	}
+	return err
+}
