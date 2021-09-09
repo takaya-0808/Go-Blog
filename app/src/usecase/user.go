@@ -4,11 +4,13 @@ import (
 	"Go-Blog/app/src/domain/model"
 	"Go-Blog/app/src/domain/repository"
 	"errors"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 type UserUseCase interface {
 	Search(name string) (*model.UserModel, error)
-	Register(user model.RegisterModel) (string, error)
+	Check(user model.RegisterModel) (string, error)
 	Show() ([]model.UserModel, error)
 	Add(user model.RegisterModel) (string, error)
 }
@@ -32,10 +34,10 @@ func (uu userUseCase) Search(name string) (*model.UserModel, error) {
 	return user, nil
 }
 
-func (uu userUseCase) Register(user model.RegisterModel) (string, error) {
+func (uu userUseCase) Check(user model.RegisterModel) (string, error) {
 
 	token := "1"
-	err := uu.userRepository.RegisterCheck(user.UserName, user.UserEmail)
+	err := uu.userRepository.Check(user.UserName, user.UserEmail)
 
 	if err != nil {
 		return "0", err
@@ -57,7 +59,12 @@ func (uu userUseCase) Show() ([]model.UserModel, error) {
 func (uu userUseCase) Add(user model.RegisterModel) (string, error) {
 
 	token := "1"
-	err := uu.userRepository.Add(user)
+	passhash, err := bcrypt.GenerateFromPassword([]byte(user.UserPassWord), bcrypt.DefaultCost)
+	if err != nil {
+		panic(err)
+	}
+	passHash := string(passhash)
+	err = uu.userRepository.Add(user.UserName, user.UserEmail, passHash)
 	if err != nil {
 		return "0", err
 	}
