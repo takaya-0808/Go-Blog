@@ -4,7 +4,7 @@ create table IF not exists `users` (
     id INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(32) NOT NULL,
     useremail VARCHAR(32) NOT NULL,
-    userpassword VARCHAR(32) NOT NULL,
+    userpassword VARCHAR(200) NOT NULL,
     created_at datetime  default current_timestamp,
     updated_at timestamp default current_timestamp on update current_timestamp,
     PRIMARY KEY (id)
