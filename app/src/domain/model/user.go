@@ -13,8 +13,8 @@ type UserModel struct {
 
 type RegisterModel struct {
 	UserName     string `json:"UserName"`
-	UserEmail    string `json:"UserEmail"`
-	UserPassWord string `json:"UserPassWord"`
+	UserEmail    string `json:"UserEmail" binding:"required"`
+	UserPassWord string `json:"UserPassWord" binding:"required"`
 }
 
 type UserBlog struct {
