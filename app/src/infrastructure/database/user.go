@@ -55,7 +55,7 @@ func (ud *userDatabase) GetAll() []model.UserModel {
 	return users
 }
 
-func (ud *userDatabase) RegisterCheck(name string, email string) error {
+func (ud *userDatabase) Check(name string, email string) error {
 
 	rows, err := ud.Conn.Query("select * from users")
 	if err != nil {
@@ -65,9 +65,9 @@ func (ud *userDatabase) RegisterCheck(name string, email string) error {
 	return err
 }
 
-func (ud *userDatabase) Add(user model.RegisterModel) error {
+func (ud *userDatabase) Add(name string, email string, pass string) error {
 
-	_, err := ud.Conn.Exec("insert into users (username,useremail,userpassword) values (?, ?, ?)", user.UserName, user.UserEmail, user.UserPassWord)
+	_, err := ud.Conn.Exec("insert into users (username,useremail,userpassword) values (?, ?, ?)", name, email, pass)
 	if err != nil {
 		panic(err)
 	}
