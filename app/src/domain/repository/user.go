@@ -8,6 +8,7 @@ type UserRepository interface {
 	// Delte(id int) error
 	// Add(user *model.UserModel) (id int, err error)
 	RegisterCheck(name string, email string) error
+	Add(user model.RegisterModel) error
 }
 
 type BlogRepository interface{}
