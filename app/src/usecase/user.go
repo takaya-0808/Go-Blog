@@ -8,8 +8,9 @@ import (
 
 type UserUseCase interface {
 	Search(name string) (*model.UserModel, error)
-	Add(user model.RegisterModel) (string, error)
+	Register(user model.RegisterModel) (string, error)
 	Show() ([]model.UserModel, error)
+	Add(user model.RegisterModel) (string, error)
 }
 
 type userUseCase struct {
@@ -31,10 +32,9 @@ func (uu userUseCase) Search(name string) (*model.UserModel, error) {
 	return user, nil
 }
 
-func (uu userUseCase) Add(user model.RegisterModel) (string, error) {
+func (uu userUseCase) Register(user model.RegisterModel) (string, error) {
 
 	token := "1"
-
 	err := uu.userRepository.RegisterCheck(user.UserName, user.UserEmail)
 
 	if err != nil {
@@ -52,4 +52,14 @@ func (uu userUseCase) Show() ([]model.UserModel, error) {
 
 	var users []model.UserModel
 	return users, nil
+}
+
+func (uu userUseCase) Add(user model.RegisterModel) (string, error) {
+
+	token := "1"
+	err := uu.userRepository.Add(user)
+	if err != nil {
+		return "0", err
+	}
+	return token, nil
 }
