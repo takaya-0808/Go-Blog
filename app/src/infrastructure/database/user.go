@@ -70,7 +70,7 @@ func (ud *userDatabase) Add(name string, email string, pass string) error {
 
 	_, err := ud.Conn.Exec("insert into users (username,useremail,userpassword) values (?, ?, ?)", name, email, pass)
 	if err != nil {
-		panic(err)
+		return err
 	}
 	return err
 }
