@@ -4,9 +4,13 @@ import (
 	"Go-Blog/app/src/domain/model"
 	"Go-Blog/app/src/domain/repository"
 	"errors"
+	"time"
 
+	jwt "github.com/dgrijalva/jwt-go"
 	"golang.org/x/crypto/bcrypt"
 )
+
+var secretKey = "75c92a074c341e9964329c0550c2673730ed8479c885c43122c90a2843177d5ef21cb50cfadcccb20aeb730487c11e09ee4dbbb02387242ef264e74cbee97213"
 
 type UserUseCase interface {
 	Search(name string) (*model.UserModel, error)
@@ -57,15 +61,21 @@ func (uu userUseCase) Show() ([]model.UserModel, error) {
 
 func (uu userUseCase) Add(user model.RegisterModel) (string, error) {
 
-	token := "1"
 	passhash, err := bcrypt.GenerateFromPassword([]byte(user.UserPassWord), bcrypt.DefaultCost)
 	if err != nil {
-		panic(err)
+		return "0", err
 	}
 	passHash := string(passhash)
 	err = uu.userRepository.Add(user.UserName, user.UserEmail, passHash)
 	if err != nil {
 		return "0", err
 	}
-	return token, nil
+	AccessToken := jwt.New(jwt.GetSigningMethod("HS256"))
+
+	AccessToken.Claims = jwt.MapClaims{
+		"user": "admin",
+		"exp":  time.Now().Add(time.Hour * 1).Unix(),
+	}
+	tokenString, err := AccessToken.SignedString([]byte(secretKey))
+	return tokenString, nil
 }
