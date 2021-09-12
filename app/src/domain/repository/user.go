@@ -5,8 +5,10 @@ import "Go-Blog/app/src/domain/model"
 type UserRepository interface {
 	Get(name string) (*model.UserModel, error)
 	GetAll() []model.UserModel
-	FindByName(name string) (string, error)
 	Add(name string, email string, pass string) error
+	IDFindByName(name string) int
+	IDFindByEmail(email string) int
+	PassFindByName(name string) (string, error)
 }
 
 type BlogRepository interface{}
