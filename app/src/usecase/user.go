@@ -40,17 +40,24 @@ func (uu userUseCase) Search(name string) (*model.UserModel, error) {
 
 func (uu userUseCase) Check(user model.RegisterModel) (string, error) {
 
-	token := "1"
-	hashpass, err := uu.userRepository.FindByName(user.UserName)
+	hashpass, err := uu.userRepository.PassFindByName(user.UserName)
 
 	if err != nil {
 		return "0", err
 	}
 	err = bcrypt.CompareHashAndPassword([]byte(hashpass), []byte(user.UserPassWord))
 	if err != nil {
-		return "0", errors.New("used name or email")
+		return "0", err
 	}
-	return token, nil
+	AccessToken := jwt.New(jwt.GetSigningMethod("HS256"))
+
+	AccessToken.Claims = jwt.MapClaims{
+		"user": "admin",
+		"exp":  time.Now().Add(time.Hour * 1).Unix(),
+	}
+	tokenString, err := AccessToken.SignedString([]byte(secretKey))
+	return tokenString, nil
+
 }
 
 func (uu userUseCase) Show() ([]model.UserModel, error) {
@@ -66,6 +73,11 @@ func (uu userUseCase) Add(user model.RegisterModel) (string, error) {
 		return "0", err
 	}
 	passHash := string(passhash)
+
+	if uu.userRepository.IDFindByName(user.UserName) != 0 && uu.userRepository.IDFindByEmail(user.UserEmail) != 0 {
+		return "0", errors.New("used name or email")
+	}
+
 	err = uu.userRepository.Add(user.UserName, user.UserEmail, passHash)
 	if err != nil {
 		return "0", err
