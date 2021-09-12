@@ -41,23 +41,22 @@ func (uu userUseCase) Search(name string) (*model.UserModel, error) {
 func (uu userUseCase) Check(user model.RegisterModel) (string, error) {
 
 	hashpass, err := uu.userRepository.PassFindByName(user.UserName)
+	if err != nil {
+		return "0", err
+	}
 
+	err = uu.CheckHashPass(hashpass, user.UserPassWord)
 	if err != nil {
 		return "0", err
 	}
-	err = bcrypt.CompareHashAndPassword([]byte(hashpass), []byte(user.UserPassWord))
-	if err != nil {
-		return "0", err
-	}
+
 	AccessToken := jwt.New(jwt.GetSigningMethod("HS256"))
-
 	AccessToken.Claims = jwt.MapClaims{
 		"user": "admin",
 		"exp":  time.Now().Add(time.Hour * 1).Unix(),
 	}
 	tokenString, err := AccessToken.SignedString([]byte(secretKey))
 	return tokenString, nil
-
 }
 
 func (uu userUseCase) Show() ([]model.UserModel, error) {
@@ -68,26 +67,40 @@ func (uu userUseCase) Show() ([]model.UserModel, error) {
 
 func (uu userUseCase) Add(user model.RegisterModel) (string, error) {
 
-	passhash, err := bcrypt.GenerateFromPassword([]byte(user.UserPassWord), bcrypt.DefaultCost)
-	if err != nil {
-		return "0", err
-	}
-	passHash := string(passhash)
-
-	if uu.userRepository.IDFindByName(user.UserName) != 0 && uu.userRepository.IDFindByEmail(user.UserEmail) != 0 {
+	passHash := uu.CreateHashPass(user.UserPassWord)
+	if uu.userRepository.IDFindByName(user.UserName) != 0 || uu.userRepository.IDFindByEmail(user.UserEmail) != 0 {
 		return "0", errors.New("used name or email")
 	}
 
-	err = uu.userRepository.Add(user.UserName, user.UserEmail, passHash)
+	err := uu.userRepository.Add(user.UserName, user.UserEmail, passHash)
 	if err != nil {
 		return "0", err
 	}
-	AccessToken := jwt.New(jwt.GetSigningMethod("HS256"))
 
+	AccessToken := jwt.New(jwt.GetSigningMethod("HS256"))
 	AccessToken.Claims = jwt.MapClaims{
 		"user": "admin",
 		"exp":  time.Now().Add(time.Hour * 1).Unix(),
 	}
 	tokenString, err := AccessToken.SignedString([]byte(secretKey))
 	return tokenString, nil
+}
+
+func (uu userUseCase) CheckHashPass(hashpass string, pass string) error {
+
+	err := bcrypt.CompareHashAndPassword([]byte(hashpass), []byte(pass))
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (uu userUseCase) CreateHashPass(pass string) string {
+
+	passhash, err := bcrypt.GenerateFromPassword([]byte(pass), bcrypt.DefaultCost)
+	if err != nil {
+		return "0"
+	}
+	passHash := string(passhash)
+	return passHash
 }
