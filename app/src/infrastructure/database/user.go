@@ -55,7 +55,7 @@ func (ud *userDatabase) GetAll() []model.UserModel {
 	return users
 }
 
-func (ud *userDatabase) FindByName(name string) (string, error) {
+func (ud *userDatabase) PassFindByName(name string) (string, error) {
 
 	var password string
 	var err error
@@ -73,4 +73,24 @@ func (ud *userDatabase) Add(name string, email string, pass string) error {
 		return err
 	}
 	return err
+}
+
+func (ud *userDatabase) IDFindByName(name string) int {
+
+	var id int
+	var err error
+	if err != ud.Conn.QueryRow("select id from users where username = ? LIMIT 1", name).Scan(&id) {
+		return 0
+	}
+	return id
+}
+
+func (ud *userDatabase) IDFindByEmail(email string) int {
+
+	var id int
+	var err error
+	if err != ud.Conn.QueryRow("select id from users where useremail = ? LIMIT 1", email).Scan(&id) {
+		return 0
+	}
+	return id
 }
