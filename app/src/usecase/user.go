@@ -104,3 +104,5 @@ func (uu userUseCase) CreateHashPass(pass string) string {
 	passHash := string(passhash)
 	return passHash
 }
+
+// func (uu userUseCase) VerifyToken(tokenString string) (*jwt.Token, error) {}
