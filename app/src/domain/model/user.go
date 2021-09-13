@@ -17,6 +17,11 @@ type RegisterModel struct {
 	UserPassWord string `json:"UserPassWord" binding:"required"`
 }
 
+type LoginModel struct {
+	UserName     string `json:"UserName"`
+	UserPassWord string `json:"UserPassWord" binding:"required"`
+}
+
 type UserBlog struct {
 	Id       int64  `json:"id"`
 	UserName string `json:"username"`
