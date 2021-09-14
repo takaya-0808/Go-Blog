@@ -25,6 +25,7 @@ func main() {
 			v1.GET("/:name", userHandler.Index)
 			v1.GET("/", userHandler.Show)
 		}
+
 	}
 
 	router.Run(":8022")
