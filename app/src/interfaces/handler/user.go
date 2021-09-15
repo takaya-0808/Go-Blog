@@ -60,7 +60,7 @@ func (uh userHandler) Register(c *gin.Context) {
 
 func (uh userHandler) Login(c *gin.Context) {
 
-	var user model.RegisterModel
+	var user model.LoginModel
 	c.Bind(&user)
 	token, err := uh.userUseCase.Check(user)
 	if err != nil {
