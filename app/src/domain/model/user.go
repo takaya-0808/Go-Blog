@@ -12,13 +12,13 @@ type UserModel struct {
 }
 
 type RegisterModel struct {
-	UserName     string `json:"UserName"`
+	UserName     string `json:"UserName" binding:"required"`
 	UserEmail    string `json:"UserEmail" binding:"required"`
 	UserPassWord string `json:"UserPassWord" binding:"required"`
 }
 
 type LoginModel struct {
-	UserName     string `json:"UserName"`
+	UserName     string `json:"UserName" binding:"required"`
 	UserPassWord string `json:"UserPassWord" binding:"required"`
 }
 
