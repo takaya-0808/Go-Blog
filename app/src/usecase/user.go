@@ -14,7 +14,7 @@ var secretKey = "75c92a074c341e9964329c0550c2673730ed8479c885c43122c90a2843177d5
 
 type UserUseCase interface {
 	Search(name string) (*model.UserModel, error)
-	Check(user model.RegisterModel) (string, error)
+	Check(user model.LoginModel) (string, error)
 	Show() ([]model.UserModel, error)
 	Add(user model.RegisterModel) (string, error)
 }
@@ -38,7 +38,7 @@ func (uu userUseCase) Search(name string) (*model.UserModel, error) {
 	return user, nil
 }
 
-func (uu userUseCase) Check(user model.RegisterModel) (string, error) {
+func (uu userUseCase) Check(user model.LoginModel) (string, error) {
 
 	hashpass, err := uu.userRepository.PassFindByName(user.UserName)
 	if err != nil {
