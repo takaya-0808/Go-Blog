@@ -17,6 +17,7 @@ type UserUseCase interface {
 	Check(user model.LoginModel) (string, error)
 	Show() ([]model.UserModel, error)
 	Add(user model.RegisterModel) (string, error)
+	VerifyToken(tokenString string) (*jwt.Token, error)
 }
 
 type userUseCase struct {
@@ -105,4 +106,9 @@ func (uu userUseCase) CreateHashPass(pass string) string {
 	return passHash
 }
 
-// func (uu userUseCase) VerifyToken(tokenString string) (*jwt.Token, error) {}
+func (uu userUseCase) VerifyToken(tokenString string) (*jwt.Token, error) {
+
+	var token *jwt.Token
+	var err error
+	return token, err
+}
