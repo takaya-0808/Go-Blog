@@ -4,13 +4,14 @@ import (
 	"Go-Blog/app/src/domain/model"
 	"Go-Blog/app/src/domain/repository"
 	"errors"
+	"os"
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"golang.org/x/crypto/bcrypt"
 )
 
-var secretKey = "75c92a074c341e9964329c0550c2673730ed8479c885c43122c90a2843177d5ef21cb50cfadcccb20aeb730487c11e09ee4dbbb02387242ef264e74cbee97213"
+var secretKey = os.Getenv("SECRETKEY")
 
 type UserUseCase interface {
 	Search(name string) (*model.UserModel, error)
