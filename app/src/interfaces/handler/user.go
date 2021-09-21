@@ -43,7 +43,7 @@ func (uh userHandler) Show(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "error"})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"message": "OK", "user data": users})
+	c.JSON(http.StatusOK, gin.H{"message": "OK", "User's data": users})
 }
 
 func (uh userHandler) Register(c *gin.Context) {
