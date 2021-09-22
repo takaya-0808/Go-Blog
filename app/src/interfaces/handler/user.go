@@ -4,7 +4,10 @@ import (
 	"Go-Blog/app/src/domain/model"
 	"Go-Blog/app/src/usecase"
 	"net/http"
+	"os"
 
+	"github.com/dgrijalva/jwt-go"
+	"github.com/dgrijalva/jwt-go/request"
 	"github.com/gin-gonic/gin"
 )
 
@@ -27,13 +30,24 @@ func NewUserHandler(uu usecase.UserUseCase) UserHandler {
 
 func (uh userHandler) Index(c *gin.Context) {
 
-	name := c.Param("name")
-	user, err := uh.userUseCase.Search(name)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message": "error"})
+	var secretKey = os.Getenv("SECRETKEY")
+	_, err := request.ParseFromRequest(c.Request, request.OAuth2Extractor, func(token *jwt.Token) (interface{}, error) {
+		b := []byte(secretKey)
+		return b, nil
+	})
+
+	if err == nil {
+		name := c.Param("name")
+		user, err := uh.userUseCase.Search(name)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"message": "error"})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"message": "ok", "user info": user})
 		return
+	} else {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "not token"})
 	}
-	c.JSON(http.StatusOK, gin.H{"message": "ok", "user info": user})
 }
 
 func (uh userHandler) Show(c *gin.Context) {
