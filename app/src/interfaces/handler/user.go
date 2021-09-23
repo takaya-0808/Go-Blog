@@ -11,6 +11,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var secretKey = os.Getenv("SECRETKEY")
+
 type UserHandler interface {
 	Index(c *gin.Context)
 	Show(c *gin.Context)
@@ -30,7 +32,6 @@ func NewUserHandler(uu usecase.UserUseCase) UserHandler {
 
 func (uh userHandler) Index(c *gin.Context) {
 
-	var secretKey = os.Getenv("SECRETKEY")
 	_, err := request.ParseFromRequest(c.Request, request.OAuth2Extractor, func(token *jwt.Token) (interface{}, error) {
 		b := []byte(secretKey)
 		return b, nil
