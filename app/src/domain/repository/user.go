@@ -11,4 +11,6 @@ type UserRepository interface {
 	PassFindByName(name string) (string, error)
 }
 
-type BlogRepository interface{}
+type BlogRepository interface {
+	GetAllArticle() (*model.UserBlog, error)
+}
