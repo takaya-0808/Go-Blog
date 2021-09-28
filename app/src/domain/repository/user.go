@@ -14,4 +14,5 @@ type UserRepository interface {
 type BlogRepository interface {
 	GetAllArticle() (*[]model.UserBlog, error)
 	GetOneArticle(id int) (*model.UserBlog, error)
+	PostArticle(*model.PostArticle) error
 }
