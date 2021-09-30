@@ -21,10 +21,3 @@ type LoginModel struct {
 	UserName     string `json:"UserName" binding:"required"`
 	UserPassWord string `json:"UserPassWord" binding:"required"`
 }
-
-type UserBlog struct {
-	Id       int64  `json:"id"`
-	UserName string `json:"username"`
-	Title    string `json:"title"`
-	Context  string `json:"context"`
-}
