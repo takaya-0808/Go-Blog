@@ -17,8 +17,18 @@ func NewBlogDabase(conn *sql.DB) repository.BlogRepository {
 	}
 }
 
-func (ud *userDatabase) GetByID(*model.UserModel) int64 {
+func (ud *userDatabase) GetAllArticle() (*[]model.Article, error) {
 
-	var id int64
-	return id
+	var articles []model.Article
+	var err error
+	return &articles, err
 }
+
+// func (ud *userDatabase) GetOneArticle(id int) (*model.Article, error) {
+
+// 	var article model.Article
+// 	var err error
+// 	return &article, err
+// }
+
+// func (id *)
