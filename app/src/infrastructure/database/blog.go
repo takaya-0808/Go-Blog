@@ -24,11 +24,11 @@ func (ud *userDatabase) GetAllArticle() (*[]model.Article, error) {
 	return &articles, err
 }
 
-// func (ud *userDatabase) GetOneArticle(id int) (*model.Article, error) {
+func (ud *userDatabase) GetOneArticle(id int) (*model.Article, error) {
 
-// 	var article model.Article
-// 	var err error
-// 	return &article, err
-// }
+	var article model.Article
+	var err error
+	return &article, err
+}
 
 // func (id *)
