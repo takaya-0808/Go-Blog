@@ -12,7 +12,7 @@ type UserRepository interface {
 }
 
 type BlogRepository interface {
-	GetAllArticle() (*[]model.UserBlog, error)
-	GetOneArticle(id int) (*model.UserBlog, error)
-	PostArticle(*model.PostArticle) error
+	GetAllArticle() (*[]model.Article, error)
+	GetOneArticle(id int) (*model.Article, error)
+	PostArticle(*model.Article) error
 }
