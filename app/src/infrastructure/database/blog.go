@@ -31,4 +31,8 @@ func (ud *userDatabase) GetOneArticle(id int) (*model.Article, error) {
 	return &article, err
 }
 
-// func (id *)
+func (ud *userDatabase) PostArticle(*model.Article) error {
+
+	var err error
+	return err
+}
