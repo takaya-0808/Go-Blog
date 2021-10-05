@@ -17,21 +17,21 @@ func NewBlogDabase(conn *sql.DB) repository.BlogRepository {
 	}
 }
 
-func (ud *userDatabase) GetAllArticle() (*[]model.Article, error) {
+func (bd *blogDatabase) GetAllArticle() (*[]model.Article, error) {
 
 	var articles []model.Article
 	var err error
 	return &articles, err
 }
 
-func (ud *userDatabase) GetOneArticle(id int) (*model.Article, error) {
+func (bd *blogDatabase) GetOneArticle(id int) (*model.Article, error) {
 
 	var article model.Article
 	var err error
 	return &article, err
 }
 
-func (ud *userDatabase) PostArticle(*model.Article) error {
+func (bd *blogDatabase) PostArticle(*model.Article) error {
 
 	var err error
 	return err
