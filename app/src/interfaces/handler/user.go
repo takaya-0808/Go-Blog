@@ -70,7 +70,7 @@ func (uh userHandler) Register(c *gin.Context) {
 	}
 	token, err := uh.userUseCase.Add(user)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"message": "miss register"})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "miss register", "error": err})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "ok", "token": token})
