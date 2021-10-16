@@ -21,6 +21,7 @@ func (bd *blogDatabase) GetAllArticle() (*[]model.Article, error) {
 
 	var articles []model.Article
 	var err error
+
 	return &articles, err
 }
 
