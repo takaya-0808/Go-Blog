@@ -22,9 +22,9 @@ func TestRegister(t *testing.T) {
 	// 	UserEmail: email,
 	// 	UserPassWord: pass,
 	// }
-	req, _ := http.NewRequest("GET", "localhost:8022/MyBlog/api/v1/", nil)
+	req, _ := http.NewRequest("GET", "/MyBlog/api/v1/", nil)
 	router.ServeHTTP(w, req)
 	assert.Equal(t, http.StatusOK, w.Code)
-	assert.Equal(t, http.StatusBadRequest, w.Code)
-	assert.Equal(t, http.StatusBadRequest, w.Code)
+	// assert.Equal(t, http.StatusBadRequest, w.Code)
+	// assert.Equal(t, http.StatusBadRequest, w.Code)
 }
