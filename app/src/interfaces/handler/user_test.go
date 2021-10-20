@@ -26,4 +26,7 @@ func TestIndex(t *testing.T) {
 	router := router.InitRouting()
 	w := httptest.NewRecorder()
 
+	req, _ := http.NewRequest("GET", "/MyBlog/api/v1/name", nil)
+	router.ServeHTTP(w, req)
+	assert.NotEqual(t, http.StatusOK, w.Code)
 }
