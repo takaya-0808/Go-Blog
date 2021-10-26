@@ -63,7 +63,7 @@ func TestLogin(t *testing.T) {
 	router := router.InitRouting()
 	w := httptest.NewRecorder()
 
-	form := model.LoginModel{
+	form := &model.LoginModel{
 		UserName:     "sen",
 		UserPassWord: "pass",
 	}
@@ -71,7 +71,8 @@ func TestLogin(t *testing.T) {
 
 	// bodys := bytes.NewBufferString("{\"UserName\":\"sen\",  \"UserPassWord\":\"pass\"}")
 	req, _ := http.NewRequest(http.MethodPost, "/MyBlog/api/auth/login", bytes.NewBuffer(body))
-	req.Header.Add("Content-Type", "application/json")
+
+	// req.Header.Add("Content-Type", "application/json")
 	router.ServeHTTP(w, req)
 	assert.Equal(t, http.StatusOK, w.Code)
 	// assert.Equal(t, http.StatusInternalServerError, w.Code)
