@@ -10,9 +10,3 @@ type UserRepository interface {
 	IDFindByEmail(email string) int
 	PassFindByName(name string) (string, error)
 }
-
-type BlogRepository interface {
-	GetAllArticle() (*[]model.Article, error)
-	GetOneArticle(id int) (*model.Article, error)
-	PostArticle(*model.Article) error
-}
