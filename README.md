@@ -9,4 +9,14 @@
 
 ## usege
 
+docker-composeの起動
+```
+docker-compose build
+docker-compose up -d
+```
+testを行う
+```
+go test ~
+```
+* 現状、POSTのtestの実行ができていない
 ## Reference
