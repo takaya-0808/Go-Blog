@@ -21,6 +21,19 @@ func (bd *blogDatabase) GetAllArticle() (*[]model.Article, error) {
 
 	var articles []model.Article
 	var err error
+	rows, err := bd.Conn.Query("select * from　blogs")
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		article := model.Article{}
+		if err := rows.Scan(&article.ID, &article.Author, &article.Content, &article.Title, &article.CreatedAt, &article.UpdatedAt); err != nil {
+			panic(err)
+		}
+		articles = append(articles, article)
+	}
 
 	return &articles, err
 }
