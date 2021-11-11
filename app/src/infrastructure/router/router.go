@@ -28,6 +28,7 @@ func InitRouting() *gin.Engine {
 			auth.POST("/login", userHandler.Login)
 			auth.POST("/register", userHandler.Register)
 		}
+
 	}
 	return router
 }
