@@ -23,7 +23,7 @@ func InitRouting() *gin.Engine {
 			v1.GET("/", userHandler.Show)
 			v1.GET("/:name", userHandler.Index)
 		}
-		auth := routerEngin.Group("/api/auth")
+		auth := routerEngin.Group("/api/user")
 		{
 			auth.POST("/login", userHandler.Login)
 			auth.POST("/register", userHandler.Register)
