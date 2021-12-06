@@ -13,7 +13,13 @@
 
 ## Requset/Responce
 + Requset: localhost:8022/MyBlog/api/v1
-+ Responce
++ Responce {"message": ok,
+            User data: user data}
+
++ Requset: localhost:8022/MyBlog/api/user/login
++ Responce {"message":"ok",
+            "token":"token_id"}
+
 
 ## usege
 
