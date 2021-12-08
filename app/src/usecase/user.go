@@ -3,12 +3,12 @@ package usecase
 import (
 	"Go-Blog/app/src/domain/model"
 	"Go-Blog/app/src/domain/repository"
+	"Go-Blog/app/utils"
 	"errors"
 	"os"
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
-	"golang.org/x/crypto/bcrypt"
 )
 
 var secretKey = os.Getenv("SECRETKEY")
@@ -47,7 +47,8 @@ func (uu userUseCase) Check(user model.LoginModel) (string, error) {
 		return "0", err
 	}
 
-	err = uu.CheckHashPass(hashpass, user.UserPassWord)
+	// err = uu.CheckHashPass(hashpass, user.UserPassWord)
+	err = utils.CheckHashPass(hashpass, user.UserPassWord)
 	if err != nil {
 		return "0", err
 	}
@@ -69,7 +70,7 @@ func (uu userUseCase) Show() ([]model.UserModel, error) {
 
 func (uu userUseCase) Add(user model.RegisterModel) (string, error) {
 
-	passHash := uu.CreateHashPass(user.UserPassWord)
+	passHash := utils.CreateHashPass(user.UserPassWord)
 	if uu.userRepository.IDFindByName(user.UserName) != 0 || uu.userRepository.IDFindByEmail(user.UserEmail) != 0 {
 		return "0", errors.New("used name or email")
 	}
@@ -86,25 +87,6 @@ func (uu userUseCase) Add(user model.RegisterModel) (string, error) {
 	}
 	tokenString, err := AccessToken.SignedString([]byte(secretKey))
 	return tokenString, nil
-}
-
-func (uu userUseCase) CheckHashPass(hashpass string, pass string) error {
-
-	err := bcrypt.CompareHashAndPassword([]byte(hashpass), []byte(pass))
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (uu userUseCase) CreateHashPass(pass string) string {
-
-	passhash, err := bcrypt.GenerateFromPassword([]byte(pass), bcrypt.DefaultCost)
-	if err != nil {
-		return "0"
-	}
-	passHash := string(passhash)
-	return passHash
 }
 
 func (uu userUseCase) VerifyToken(tokenString string) (*jwt.Token, error) {
