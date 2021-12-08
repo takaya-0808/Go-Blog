@@ -12,9 +12,16 @@ import (
 func InitRouting() *gin.Engine {
 
 	router := gin.Default()
+
+	// User data
 	userDatabases := database.NewUserDabase(config.Connection())
 	userUseCases := usecase.NewUseUsecase(userDatabases)
 	userHandler := handler.NewUserHandler(userUseCases)
+
+	// Blog data
+	blogDatabase := database.NewBlogDabase(config.Connection())
+	blogUseCases := usecase.NewBlogUseCase(blogDatabase)
+	blogHandler := handler.NewBlogHandler(blogUseCases)
 
 	routerEngin := router.Group("/MyBlog")
 	{
@@ -27,6 +34,10 @@ func InitRouting() *gin.Engine {
 		{
 			auth.POST("/login", userHandler.Login)
 			auth.POST("/register", userHandler.Register)
+		}
+		article := routerEngin.Group("/api/aritcle")
+		{
+			article.GET("/", blogHandler.Show)
 		}
 
 	}
