@@ -12,9 +12,13 @@ create table IF not exists `blogs` (
 
 INSERT INTO blogs (id,author,title,context) VALUES (1, 'TOM','xxxx@mail.co.jp', 'hogehoge');
 
+DROP TABLE IF EXISTS `titles`;
+
 create table IF not exists `titles` (
     id INT,
     title VARCHAR(32) NOT NULL,
     urls VARCHAR(64) NOT NULL
 );
+
+
 
