@@ -38,6 +38,7 @@ func InitRouting() *gin.Engine {
 		article := routerEngin.Group("/api/aritcle")
 		{
 			article.GET("/", blogHandler.Show)
+			article.GET("/titles", blogHandler.TitleShow)
 		}
 
 	}
