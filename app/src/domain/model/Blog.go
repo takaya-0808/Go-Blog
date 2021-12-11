@@ -10,3 +10,8 @@ type Article struct {
 	UpdatedAt time.Time `json:"updated_at"`
 	CreatedAt time.Time `json:"created_at"`
 }
+
+type TitlesShow struct {
+	Title string `json:"title"`
+	URL   string `json:"url"`
+}
