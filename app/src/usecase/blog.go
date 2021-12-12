@@ -7,6 +7,7 @@ import (
 
 type BlogUseCase interface {
 	Index() (*[]model.Article, error)
+	TitleShow() (*[]model.TitlesShow, error)
 }
 
 type blogUseCases struct {
@@ -26,4 +27,9 @@ func (bu blogUseCases) Index() (*[]model.Article, error) {
 		return nil, err
 	}
 	return articles, nil
+}
+
+func (bu blogUseCases) TitleShow() (*[]model.TitlesShow, error) {
+
+	return nil, nil
 }
