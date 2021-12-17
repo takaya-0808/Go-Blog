@@ -4,9 +4,12 @@ import (
 	"testing"
 )
 
+type NameType string
+
 func TestSearch(t *testing.T) {
 
-	test_name := "hoge"
+	var name = "hoge"
+	test_name := NameType(name)
 	user, err := userUseCase.Search(test_name)
 	if err != nil {
 		t.Fatalf("failed test %#v", err)
