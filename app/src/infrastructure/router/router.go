@@ -35,7 +35,7 @@ func InitRouting() *gin.Engine {
 			auth.POST("/login", userHandler.Login)
 			auth.POST("/register", userHandler.Register)
 		}
-		article := routerEngin.Group("/api/aritcle")
+		article := routerEngin.Group("/api/article")
 		{
 			article.GET("/", blogHandler.Show)
 			article.GET("/titles", blogHandler.TitleShow)
