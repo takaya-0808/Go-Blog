@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestShow(t *testing.T) {
+func TestShowBlog(t *testing.T) {
 
 	router := router.InitRouting()
 	w := httptest.NewRecorder()
