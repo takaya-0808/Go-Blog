@@ -19,3 +19,12 @@ func TestShowBlog(t *testing.T) {
 	// assert.Equal(t, http.StatusOK, w.Code)
 	assert.NotEqual(t, http.StatusOK, w.Code)
 }
+
+func TestTitleShowBlog(t *testing.T) {
+
+	router := router.InitRouting()
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("GET", "/Myblog/api/article/titles", nil)
+	router.ServeHTTP(w, req)
+	assert.Equal(t, http.StatusOK, w.Code)
+}
