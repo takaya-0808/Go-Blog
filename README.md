@@ -13,9 +13,9 @@
   + DELETE: localhost:8022/MyBlog/api/user/{userid} => 特定のユーザの削除
 + article
   + GET: localhost:8022/MyBlog/api/article => 記事を全て取得
+  + + POST: localhost:8022/MyBlog/api/article => 記事を作成
+  + GET: localhost:8022/MyBlog/api/article/{:id} => 記事を取得
   + GET: localhost:8022/MyBlog/api/article/titles => タイトル一覧取得
-  + 
-
 
 ## Requset/Responce
 + Requset: localhost:8022/MyBlog/api/v1
