@@ -12,6 +12,7 @@ import (
 type BlogHandler interface {
 	Show(c *gin.Context)
 	TitleShow(c *gin.Context)
+	CreateArticle(c *gin.Context)
 }
 
 type blogHandler struct {
@@ -41,4 +42,8 @@ func (bh blogHandler) TitleShow(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "error"})
 	}
 	c.JSON(http.StatusOK, gin.H{"titles": title})
+}
+
+func (bu blogHandler) CreateArticle(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message": "ok"})
 }
