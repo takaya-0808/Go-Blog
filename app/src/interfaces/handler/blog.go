@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"Go-Blog/app/src/domain/model"
 	"Go-Blog/app/src/usecase"
 	"net/http"
 
@@ -40,10 +41,17 @@ func (bh blogHandler) TitleShow(c *gin.Context) {
 	title, err := bh.blogUsecase.TitleShow()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "error"})
+		return
 	}
 	c.JSON(http.StatusOK, gin.H{"titles": title})
 }
 
 func (bu blogHandler) CreateArticle(c *gin.Context) {
+
+	var blog model.CreateArticle
+	if err := c.Bind(&blog); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "Bad Request"})
+		return
+	}
 	c.JSON(http.StatusOK, gin.H{"message": "ok"})
 }
