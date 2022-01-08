@@ -8,6 +8,7 @@ import (
 type BlogUseCase interface {
 	Index() (*[]model.Article, error)
 	TitleShow() (*[]model.TitlesShow, error)
+	Create() error
 }
 
 type blogUseCases struct {
@@ -32,4 +33,8 @@ func (bu blogUseCases) Index() (*[]model.Article, error) {
 func (bu blogUseCases) TitleShow() (*[]model.TitlesShow, error) {
 
 	return nil, nil
+}
+
+func (bu blogUseCases) Create() error {
+	return nil
 }
