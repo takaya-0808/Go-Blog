@@ -45,6 +45,9 @@ func (bu blogUseCases) TitleShow() (*[]model.TitlesShow, error) {
 func (bu blogUseCases) GetArticle(id int) (*model.Article, error) {
 
 	article, err := bu.blogRepository.GetOneArticle(id)
+	if err != nil {
+		return nil, err
+	}	
 }
 
 // POST function
