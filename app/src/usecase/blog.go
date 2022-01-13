@@ -3,11 +3,13 @@ package usecase
 import (
 	"Go-Blog/app/src/domain/model"
 	"Go-Blog/app/src/domain/repository"
+	"errors"
 )
 
 type BlogUseCase interface {
 	Index() (*[]model.Article, error)
 	TitleShow() (*[]model.TitlesShow, error)
+	GetArticle(id int) (*model.Article, error)
 	Create() error
 }
 
@@ -21,6 +23,7 @@ func NewBlogUseCase(br repository.BlogRepository) BlogUseCase {
 	}
 }
 
+// GET function
 func (bu blogUseCases) Index() (*[]model.Article, error) {
 
 	articles, err := bu.blogRepository.GetAllArticle()
@@ -32,9 +35,19 @@ func (bu blogUseCases) Index() (*[]model.Article, error) {
 
 func (bu blogUseCases) TitleShow() (*[]model.TitlesShow, error) {
 
+	titles, err := bu.blogRepository.TitleShow()
+	if err := nil {
+		return nil, errors.New("No title")
+	}
 	return nil, nil
 }
 
+func (bu blogUseCases) GetArticle(id int) (*model.Article, error) {
+
+	article, err := bu.blogRepository.GetOneArticle(id)
+}
+
+// POST function
 func (bu blogUseCases) Create() error {
 	return nil
 }
