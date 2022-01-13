@@ -38,8 +38,15 @@ func (bd *blogDatabase) GetAllArticle() (*[]model.Article, error) {
 func (bd *blogDatabase) GetOneArticle(id int) (*model.Article, error) {
 
 	var article model.Article
-	var err error
+	err := bd.Conn.QueryRow("select * from blogs where id = ?LIMIT 1", id).Scan(&article)
+	if err != nil {
+		return nil, err
+	}
 	return &article, err
+}
+
+func (bd *blogDatabase) TitleShow() (*[]model.TitlesShow, error) {
+	return nil, nil
 }
 
 func (bd *blogDatabase) PostArticle(*model.Article) error {
