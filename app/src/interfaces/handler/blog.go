@@ -13,6 +13,7 @@ import (
 type BlogHandler interface {
 	Show(c *gin.Context)
 	TitleShow(c *gin.Context)
+	GetArticle(c *gin.Context)
 	CreateArticle(c *gin.Context)
 }
 
@@ -26,6 +27,7 @@ func NewBlogHandler(bu usecase.BlogUseCase) BlogHandler {
 	}
 }
 
+// GET function
 func (bh blogHandler) Show(c *gin.Context) {
 
 	artcles, err := bh.blogUsecase.Index()
@@ -46,6 +48,9 @@ func (bh blogHandler) TitleShow(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"titles": title})
 }
 
+func (bh blogHandler) GetArticle(c *gin.Context) {}
+
+// POST function
 func (bu blogHandler) CreateArticle(c *gin.Context) {
 
 	var blog model.CreateArticle
