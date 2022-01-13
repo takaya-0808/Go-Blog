@@ -9,13 +9,15 @@
   + POST: localhost:8022/MyBlog/api/user/login => ユーザをサイイン
   + POST: localhost:8022/MyBlog/api/user/register => 新たなユーザの登録
   + GET: localhost:8022/MyBlog/api/user/{userid} => 特定のユーザの検索
-  + PUT: localhost:8022/MyBlog/api/user/{userid}　=> 特定のユーザの更新
+  + PUT: localhost:8022/MyBlog/api/user/{userid} => 特定のユーザの更新
   + DELETE: localhost:8022/MyBlog/api/user/{userid} => 特定のユーザの削除
 + article
   + GET: localhost:8022/MyBlog/api/article => 記事を全て取得
-  + + POST: localhost:8022/MyBlog/api/article => 記事を作成
-  + GET: localhost:8022/MyBlog/api/article/{:id} => 記事を取得
+  + POST: localhost:8022/MyBlog/api/article => 記事の作成
+  + GET: localhost:8022/MyBlog/api/article/{:id} => 記事の取得
   + GET: localhost:8022/MyBlog/api/article/titles => タイトル一覧取得
+  + PUT: localhost:8022/MyBlog/api/article/{:id} => 記事の更新
+  + DELETE: localhost:8022/MyBlog/api/article/{:id} => 記事の削除
 
 ## Requset/Responce
 + Requset: localhost:8022/MyBlog/api/v1
