@@ -23,7 +23,7 @@ func TestShow(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.NotEqual(t, http.StatusBadRequest, w.Code)
 	// assert.Equal(t, http.StatusBadRequest, w.Code)
-}
+} 
 
 func TestIndex(t *testing.T) {
 
