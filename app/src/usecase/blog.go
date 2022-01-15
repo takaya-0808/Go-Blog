@@ -48,6 +48,7 @@ func (bu blogUseCases) GetArticle(id int) (*model.Article, error) {
 	if err != nil {
 		return nil, err
 	}	
+	
 }
 
 // POST function
