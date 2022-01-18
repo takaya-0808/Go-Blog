@@ -4,6 +4,7 @@ import (
 	"Go-Blog/app/src/domain/model"
 	"Go-Blog/app/src/usecase"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -48,7 +49,16 @@ func (bh blogHandler) TitleShow(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"titles": title})
 }
 
-func (bh blogHandler) GetArticle(c *gin.Context) {}
+func (bh blogHandler) GetArticle(c *gin.Context) {
+
+	id, _ := strconv.Atoi(c.Param("id"))
+	artcle, err := bh.blogUsecase.GetArticle(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "error"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "OK", "artcle": artcle})
+}
 
 // POST function
 func (bu blogHandler) CreateArticle(c *gin.Context) {
