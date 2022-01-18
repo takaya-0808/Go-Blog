@@ -4,6 +4,7 @@ import (
 	"Go-Blog/app/src/domain/model"
 	"Go-Blog/app/src/domain/repository"
 	"errors"
+	"log"
 )
 
 type BlogUseCase interface {
@@ -36,9 +37,10 @@ func (bu blogUseCases) Index() (*[]model.Article, error) {
 func (bu blogUseCases) TitleShow() (*[]model.TitlesShow, error) {
 
 	titles, err := bu.blogRepository.TitleShow()
-	if err := nil {
+	if err != nil {
 		return nil, errors.New("No title")
 	}
+	log.Println(titles)
 	return nil, nil
 }
 
@@ -47,7 +49,7 @@ func (bu blogUseCases) GetArticle(id int) (*model.Article, error) {
 	article, err := bu.blogRepository.GetOneArticle(id)
 	if err != nil {
 		return nil, err
-	}	
+	}
 	return article, nil
 }
 
