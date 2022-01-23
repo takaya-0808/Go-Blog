@@ -46,6 +46,7 @@ func (bd *blogDatabase) GetOneArticle(id int) (*model.Article, error) {
 }
 
 func (bd *blogDatabase) TitleShow() (*[]model.TitlesShow, error) {
+
 	return nil, nil
 }
 
