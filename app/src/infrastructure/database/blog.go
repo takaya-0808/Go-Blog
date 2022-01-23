@@ -47,7 +47,20 @@ func (bd *blogDatabase) GetOneArticle(id int) (*model.Article, error) {
 
 func (bd *blogDatabase) TitleShow() (*[]model.TitlesShow, error) {
 
-	return nil, nil
+	var titles []model.TitlesShow
+	rows, err := bd.Conn.Query("select * from titles")
+	if err != nil {
+		panic(err)
+	}
+
+	for rows.Next() {
+		title := model.TitlesShow{}
+		if err := rows.Scan(&title.Title, &title.URL); err != nil {
+			panic(err)
+		}
+		titles = append(titles, title)
+	}
+	return &titles, err
 }
 
 func (bd *blogDatabase) PostArticle(*model.Article) error {
