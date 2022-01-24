@@ -21,4 +21,5 @@ create table IF not exists `titles` (
 );
 
 
+INSERT INTO titles (id, title, urls) VALUES (1, 'xxxx@mail.co.jp', 'http://hogehoge');
 
