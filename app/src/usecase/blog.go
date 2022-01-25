@@ -39,6 +39,7 @@ func (bu blogUseCases) TitleShow() (*[]model.TitlesShow, error) {
 	if err != nil {
 		return nil, errors.New("No title")
 	}
+	print(titles)
 	return titles, nil
 }
 
