@@ -61,12 +61,16 @@ func (bh blogHandler) GetArticle(c *gin.Context) {
 }
 
 // POST function
-func (bu blogHandler) CreateArticle(c *gin.Context) {
+func (bh blogHandler) CreateArticle(c *gin.Context) {
 
 	var blog model.CreateArticle
 	if err := c.Bind(&blog); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"status": "Bad Request"})
 		return
+	}
+	errs := bh.blogUsecase.Create()
+	if errs != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"Status": "Bad Request", "error": "no article"})
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "ok"})
 }
