@@ -68,7 +68,7 @@ func (bh blogHandler) CreateArticle(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"status": "Bad Request"})
 		return
 	}
-	errs := bh.blogUsecase.Create()
+	errs := bh.blogUsecase.Create(&blog)
 	if errs != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Status": "Bad Request", "error": "no article"})
 	}
