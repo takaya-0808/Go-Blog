@@ -63,7 +63,7 @@ func (bd *blogDatabase) TitleShow() (*[]model.TitlesShow, error) {
 	return &titles, err
 }
 
-func (bd *blogDatabase) PostArticle(*model.Article) error {
+func (bd *blogDatabase) PostArticle(article *model.CreateArticle) error {
 
 	var err error
 	return err
