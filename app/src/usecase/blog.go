@@ -10,7 +10,7 @@ type BlogUseCase interface {
 	Index() (*[]model.Article, error)
 	TitleShow() (*[]model.TitlesShow, error)
 	GetArticle(id int) (*model.Article, error)
-	Create(*model.CreateArticle) error
+	Create(article *model.CreateArticle) error
 }
 
 type blogUseCases struct {
@@ -53,7 +53,11 @@ func (bu blogUseCases) GetArticle(id int) (*model.Article, error) {
 }
 
 // POST function
-func (bu blogUseCases) Create(*model.CreateArticle) error {
+func (bu blogUseCases) Create(article *model.CreateArticle) error {
 
+	err := bu.blogRepository.PostArticle(article)
+	if err != nil {
+		return err
+	}
 	return nil
 }
