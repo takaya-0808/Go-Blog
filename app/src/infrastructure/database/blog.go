@@ -66,5 +66,6 @@ func (bd *blogDatabase) TitleShow() (*[]model.TitlesShow, error) {
 func (bd *blogDatabase) PostArticle(article *model.CreateArticle) error {
 
 	var err error
+	_, err = bd.Conn.Exec("insert into blogs (author, title, context) VALUES (?, ?, ?)", article.Author, article.Title, article.Content)
 	return err
 }
