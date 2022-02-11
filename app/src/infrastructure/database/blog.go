@@ -67,5 +67,8 @@ func (bd *blogDatabase) PostArticle(article *model.CreateArticle) error {
 
 	var err error
 	_, err = bd.Conn.Exec("insert into blogs (author, title, context) VALUES (?, ?, ?)", article.Author, article.Title, article.Content)
+	if err != nil {
+		return err
+	}
 	return err
 }
