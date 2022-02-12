@@ -55,7 +55,7 @@ func (bd *blogDatabase) TitleShow() (*[]model.TitlesShow, error) {
 
 	for rows.Next() {
 		title := model.TitlesShow{}
-		if err := rows.Scan(&title.ID, &title.Title, &title.URL); err != nil {
+		if err := rows.Scan(&title.Title, &title.URL); err != nil {
 			panic(err)
 		}
 		titles = append(titles, title)
