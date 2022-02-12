@@ -15,11 +15,10 @@ INSERT INTO blogs (id,author,title,context) VALUES (1, 'TOM','xxxx@mail.co.jp', 
 DROP TABLE IF EXISTS `titles`;
 
 create table IF not exists `titles` (
-    id INT,
     title VARCHAR(32) NOT NULL,
     urls VARCHAR(64) NOT NULL
 );
 
 
-INSERT INTO titles (id, title, urls) VALUES (1, 'xxxx@mail.co.jp', 'http://hogehoge');
+INSERT INTO titles (title, urls) VALUES ('xxxx@mail.co.jp', 'http://hogehoge');
 
