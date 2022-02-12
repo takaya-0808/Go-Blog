@@ -70,5 +70,10 @@ func (bd *blogDatabase) PostArticle(article *model.CreateArticle) error {
 	if err != nil {
 		return err
 	}
+	url := "http://hogehoge/" + article.Author + "/" + article.Title
+	_, err = bd.Conn.Exec("insert into titles (title, urls) VALUES (?, ?)", article.Title, url)
+	if err != nil {
+		return err
+	}
 	return err
 }
