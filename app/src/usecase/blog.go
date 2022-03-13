@@ -52,6 +52,8 @@ func (bu blogUseCases) GetArticle(id int) (*model.Article, error) {
 	return article, nil
 }
 
+// func (bu blogUseCases) TitleOneShow()
+
 // POST function
 func (bu blogUseCases) Create(article *model.CreateArticle) error {
 
