@@ -13,6 +13,7 @@ import (
 
 type BlogHandler interface {
 	Show(c *gin.Context)
+	TitleOneShow(c *gin.Context)
 	TitleShow(c *gin.Context)
 	GetArticle(c *gin.Context)
 	CreateArticle(c *gin.Context)
@@ -58,6 +59,17 @@ func (bh blogHandler) GetArticle(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "OK", "artcle": artcle})
+}
+
+func (bu blogHandler) TitleOneShow(c *gin.Context) {
+
+	id, _ := strconv.Atoi(c.Param("id"))
+	title, err := bu.blogUsecase.TitleOneShow(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "error"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "OK", "title": title})
 }
 
 // POST function
