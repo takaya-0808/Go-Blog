@@ -45,6 +45,10 @@ func (bd *blogDatabase) GetOneArticle(id int) (*model.Article, error) {
 	return &article, err
 }
 
+func (bd *blogDatabase) TitleOneShow(id int) (*model.TitlesShow, error) {
+	return nil, nil
+}
+
 func (bd *blogDatabase) TitleShow() (*[]model.TitlesShow, error) {
 
 	var titles []model.TitlesShow
