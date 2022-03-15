@@ -8,6 +8,7 @@ import (
 
 type BlogUseCase interface {
 	Index() (*[]model.Article, error)
+	TitleOneShow(id int) (*model.TitlesShow, error)
 	TitleShow() (*[]model.TitlesShow, error)
 	GetArticle(id int) (*model.Article, error)
 	Create(article *model.CreateArticle) error
@@ -52,7 +53,9 @@ func (bu blogUseCases) GetArticle(id int) (*model.Article, error) {
 	return article, nil
 }
 
-// func (bu blogUseCases) TitleOneShow()
+func (bu blogUseCases) TitleOneShow(id int) (*model.TitlesShow, error) {
+	return nil, nil
+}
 
 // POST function
 func (bu blogUseCases) Create(article *model.CreateArticle) error {
