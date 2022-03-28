@@ -40,7 +40,7 @@ func InitRouting() *gin.Engine {
 			article.GET("", blogHandler.Show)
 			article.POST("", blogHandler.CreateArticle)
 			article.GET("/:id", blogHandler.GetArticle)
-			article.PUT("/:id")
+			article.PUT("/:id", blogHandler.UpdateArticle)
 			article.GET("/titles", blogHandler.TitleShow)
 			article.GET("/titles/:id", blogHandler.TitleOneShow)
 		}
