@@ -38,7 +38,7 @@ func (ud *userDatabase) Get(name string) (*model.UserModel, error) {
 
 func (ud *userDatabase) GetAll() []model.UserModel {
 
-	rows, err := ud.Conn.Query("select * from　users")
+	rows, err := ud.Conn.Query("select * from users")
 	if err != nil {
 		panic(err)
 	}
@@ -94,3 +94,4 @@ func (ud *userDatabase) IDFindByEmail(email string) int {
 	}
 	return id
 }
+
