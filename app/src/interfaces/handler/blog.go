@@ -17,6 +17,7 @@ type BlogHandler interface {
 	TitleShow(c *gin.Context)
 	GetArticle(c *gin.Context)
 	CreateArticle(c *gin.Context)
+	UpdateArticle(c *gin.Context)
 }
 
 type blogHandler struct {
@@ -83,6 +84,18 @@ func (bh blogHandler) CreateArticle(c *gin.Context) {
 	errs := bh.blogUsecase.Create(&blog)
 	if errs != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Status": "Bad Request", "error": "no article"})
+		return
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "ok"})
+}
+
+// PUT function
+func (bh blogHandler) UpdateArticle(c *gin.Context) {
+
+	var updateArticle model.CreateArticle
+	if err := c.Bind(&updateArticle); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"Status": "Bad Request"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "OK"})
 }
